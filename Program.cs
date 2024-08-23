@@ -37,8 +37,24 @@ namespace EspacioCadeteria
         public string Direccion { get => direccion; set => direccion = value; }
         public int Telefono { get => telefono; set => telefono = value; }
     }
-    
 
+    public class Cadete 
+    {
+        public int Id {get; set;}
+        public string Nombre {get; set;}
+        public string Direccion {get; set;}
+        public int Telefono {get; set;}
+        public List<Pedidos> ListadoPedidos { get; set;} 
+    }
+
+    public class Cadeteria
+    {
+        public string Nombre {get; set;}
+        public int Telefono { get; set;}
+        public List<Cadete> ListadoCadetes { get; set;}
+    }
+
+//verdireccion que sea un metodo que devuelva un string 
     
     //en cadete hago el constructor cadete(){new list PEdido}
 }//en cadete metodo agregarpedido y quitarpedido
