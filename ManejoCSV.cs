@@ -1,6 +1,4 @@
-using EspacioCadete;
-using EspacioCadeteria;
-namespace EspacioCSV
+namespace EspacioCadeteria
 {
     class AccesoAdatos
     {

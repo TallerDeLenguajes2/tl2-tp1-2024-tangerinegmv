@@ -1,20 +1,11 @@
 ﻿using EspacioCadeteria;
-using EspacioCadete;
-using EspacioCliente;
-using EspacioCSV;
-using EspacioPedidos;
 
-namespace Main
-{
-    public class Program
-    {
-        ﻿// See https://aka.ms/new-console-template for more information
-        //Estado conviene más hacerlo enum ya que quizás en un futuro además de realizado y no realizado, quizas agregar en camino no sería posible si asignara bool
-        //Hacer un campo publico no esta bien visto, siempre se trabaja con campos y atributos privados, mientras que las propiedades y los metodos pueden ser publicos
+    
+    
         
 
-        public void Interfaz()
-        {
+        
+        
             AccesoAdatos datos = new AccesoAdatos();
             Cadeteria cadeteria = new Cadeteria();
 
@@ -58,7 +49,7 @@ namespace Main
                         cadeteria.MostrarCadetes();
                         System.Console.WriteLine("Ingrese el id del cadete que asignara el pedido:");
                         int.TryParse(Console.ReadLine(), out nroCadete);
-                        cadeteria.ListadoCadetes[nroCadete].TomarPedido(pedido);
+                        //cadeteria.ListadoCadetes[nroCadete].TomarPedido(pedido);
                         pedido = null;
                     }else
                     {
@@ -66,17 +57,13 @@ namespace Main
                     }
                     break;
                 case 3:
-                    cadeteria.MostrarCadetes();
-                    System.Console.WriteLine("Ingrese el nro de cadete del cual cambiara el estado del pedido:");
-                    int.TryParse(Console.ReadLine(), out nroCadete);
-
-                    Cadete cadete = cadeteria.ListadoCadetes[nroCadete-1]; 
-                    cadete.MostrarPedidos();
-                    
                     System.Console.WriteLine("Ingrese el nro del pedido a cambiar:");
                     int.TryParse(Console.ReadLine(), out int nroPedido);
-                    pedido = cadete.ListadoPedidos.FirstOrDefault(p => p.Numero == nroPedido);
-                    pedido.CambiarEstado();
+                    
+                    cadeteria.CambiarEstadoPedido(nroPedido);
+                    
+                    
+                  
                     break;
                 case 4:
                    
@@ -85,9 +72,8 @@ namespace Main
             }
         }
 
-        }
-      
+        
+    
         
 
-    }
-}
+    

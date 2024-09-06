@@ -1,5 +1,5 @@
-using EspacioCadeteria;
-namespace EspacioCliente
+
+namespace EspacioCadeteria
 {
      public class Cliente
     {

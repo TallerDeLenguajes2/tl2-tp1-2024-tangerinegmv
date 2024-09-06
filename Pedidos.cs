@@ -1,7 +1,5 @@
-using EspacioCliente;
-using EspacioCadeteria;
 using System.Diagnostics.Contracts;
-namespace EspacioPedidos
+namespace EspacioCadeteria
 {
     public class Pedidos
     {
