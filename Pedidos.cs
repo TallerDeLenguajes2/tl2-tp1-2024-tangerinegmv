@@ -3,7 +3,6 @@ namespace EspacioCadeteria
 {
     public class Pedidos
     {
-        //private int numero;
          private static int contador = 0;
         public string obs;
         private Cliente cliente;
@@ -21,8 +20,10 @@ namespace EspacioCadeteria
             
         }
 
-        public int Numero { get ; set ; }//se puede hacer esto y no haría falta la linea 3
-        public Estados Estado { get; set; }
+        private int numero;
+        private Estados estado;
+        public int Numero { get => numero; set => numero = value; }
+        public Estados Estado { get => estado; set => estado = value; }
 
         public string VerDireccionCliente()
         {
@@ -42,11 +43,11 @@ namespace EspacioCadeteria
         }
          
         public void CambiarEstado()
-    {
-        System.Console.WriteLine("Cambiar a estado:");
-        System.Console.WriteLine("1 - Completado");
-        Estado = Estados.completo;
-    }
+        {
+            System.Console.WriteLine("Cambiar a estado:");
+            System.Console.WriteLine("1 - Completado");
+            Estado = Estados.completo;
+        }
 
     }
 }
