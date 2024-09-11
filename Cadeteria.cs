@@ -32,10 +32,10 @@ namespace EspacioCadeteria
 
          public void MostrarCadetes()
         {
-            System.Console.WriteLine("Cadetes:");
+           Console.WriteLine("Cadetes:");
             foreach(Cadete cadete in listadocadetes)
             {
-                System.Console.WriteLine($"Cadete {cadete.Id}\nNombre: {cadete.Nombre}\nTelefono: {cadete.Telefono}");
+               Console.WriteLine($"Cadete {cadete.Id}\nNombre: {cadete.Nombre}\nTelefono: {cadete.Telefono}");
             }
         }
         public void CambiarEstadoPedido(int nroPedido)
@@ -47,10 +47,10 @@ namespace EspacioCadeteria
               
             }
         }    
-        public void DarAltaPedido()
+        public void DarAltaPedido1()
         {
             
-            System.Console.WriteLine("Ingrese el nro del pedido:");
+           Console.WriteLine("Ingrese el nro del pedido:");
             int.TryParse(Console.ReadLine(), out int nropedido);
 
             foreach(Cadete cadete in listadocadetes)
@@ -58,19 +58,32 @@ namespace EspacioCadeteria
                cadete.QuitarPedido(nropedido);
             }
 
-            /* System.Console.WriteLine("----------Carga Del Cliente----------");
-            System.Console.WriteLine("Ingrese el nombre del cliente:");
+          
+        }
+        public void DarAltaPedido2()
+        {
+            
+            Console.WriteLine("Ingrese el nro del pedido:");
+            int.TryParse(Console.ReadLine(), out int nropedido);
+
+            Console.WriteLine("----------Carga Del Cliente----------");
+            Console.WriteLine("Ingrese el nombre del cliente:");
             string nombre = Console.ReadLine();
-            System.Console.WriteLine("Ingrese la direccion del cliente:");
+            Console.WriteLine("Ingrese la direccion del cliente:");
             string direccion = Console.ReadLine();
-            System.Console.WriteLine("Ingrese el numero del cliente(sin codigo de area):");
+            Console.WriteLine("Ingrese el numero del cliente(sin codigo de area):");
             string telefono = Console.ReadLine();
-            System.Console.WriteLine("Ingrese algun dato de referencia de la direccion:");
+            Console.WriteLine("Ingrese algun dato de referencia de la direccion:");
             string DRD = Console.ReadLine();
-            System.Console.WriteLine("-------------------------------------");
-            Pedidos pedido = new Pedidos(nombre, direccion, telefono, DRD); */
+            Console.WriteLine("-------------------------------------");
+            Pedidos pedido = new Pedidos(nombre, direccion, telefono, DRD); 
+            Random random = new Random();
+            int randomId = random.Next(1,listadocadetes.Count);
+            Cadete cadeteElegido = listadocadetes.FirstOrDefault(cadete => cadete.Id == randomId);
+            bool tarea = cadeteElegido.TomarPedido(pedido.Numero);
            
         }
+
 
         public bool AsignarPedidoACadete(int nropedido)
         {
