@@ -43,12 +43,50 @@ namespace EspacioCadeteria
             foreach(Cadete cadete in listadocadetes)
             {
                 
-                bool resultado=cadete.CambiaEstadoPedido(nroPedido);
+               cadete.CambiaEstadoPedido(nroPedido);
               
             }
         }    
-        public void ReasignarPedido()
+        public void DarAltaPedido()
         {
+            
+            System.Console.WriteLine("Ingrese el nro del pedido:");
+            int.TryParse(Console.ReadLine(), out int nropedido);
+
+            foreach(Cadete cadete in listadocadetes)
+            {
+               cadete.QuitarPedido(nropedido);
+            }
+
+            /* System.Console.WriteLine("----------Carga Del Cliente----------");
+            System.Console.WriteLine("Ingrese el nombre del cliente:");
+            string nombre = Console.ReadLine();
+            System.Console.WriteLine("Ingrese la direccion del cliente:");
+            string direccion = Console.ReadLine();
+            System.Console.WriteLine("Ingrese el numero del cliente(sin codigo de area):");
+            string telefono = Console.ReadLine();
+            System.Console.WriteLine("Ingrese algun dato de referencia de la direccion:");
+            string DRD = Console.ReadLine();
+            System.Console.WriteLine("-------------------------------------");
+            Pedidos pedido = new Pedidos(nombre, direccion, telefono, DRD); */
+           
+        }
+
+        public bool AsignarPedidoACadete(int nropedido)
+        {
+           
+            Console.WriteLine("Ingrese el id del cadete al que le asignará el pedido:");
+            int.TryParse(Console.ReadLine(), out int idCadete);
+
+            Cadete cadeteElegido = listadocadetes.FirstOrDefault(cadete => cadete.Id == idCadete);
+            if (cadeteElegido != null)
+            {
+                return cadeteElegido.TomarPedido(nropedido);
+               
+            }else
+            {
+                return false;
+            }
             
         }
     }
