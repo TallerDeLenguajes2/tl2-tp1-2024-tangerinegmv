@@ -5,53 +5,76 @@ namespace EspacioCadeteria
      public class Cadete 
     {
         private List<Pedidos> listadopedidos;
-        public int Id {get; set;}
-        public string Nombre {get; set;}
-        public string Direccion {get; set;}
-        public string Telefono {get; set;}
-        //public List<Pedidos> ListadoPedidos { get; set;} 
+        private int id;
+        private string nombre;
+        private string direccion;
+        private string telefono;
+        public int Id { get => id; set => id = value; }
+        public string Nombre { get => nombre; set => nombre = value; }
+        public string Direccion { get => direccion; set => direccion = value; }
+        public string Telefono { get => telefono; set => telefono = value; }
+
+        
         public Cadete()
         {
            listadopedidos= new List<Pedidos>();
         }
 
-        public void TomarPedido(Pedidos pedido)
+        public bool TomarPedido(int nropedido)
         {
-            listadopedidos.Add(pedido);
-          //  return ListadoPedidos;
+            Pedidos pedidoElegido = listadopedidos.FirstOrDefault(pedido => pedido.Numero == nropedido);
+            if(pedidoElegido != null)
+            {
+              listadopedidos.Add(pedidoElegido);
+              return true;
+            }else
+            {
+                return false;
+            }
+            
         }
         public void QuitarPedido(int nropedido)
         {   
 
             //esto se lo puede reemplazar con comandos linq
-            foreach (Pedidos pedido in listadopedidos)
+            /*     foreach (Pedidos pedido in listadopedidos)
+                    {
+                        if (pedido.Numero==nropedido)
+                            listadopedidos.Remove(pedido);
+                    } */
+
+            //con linq
+            var pedidoElegido = from pedido in listadopedidos
+                                where pedido.Numero == nropedido 
+                                select pedido;
+            foreach (Pedidos pedido in pedidoElegido)
             {
-                if (pedido.Numero==nropedido)
-                    listadopedidos.Remove(pedido);
-            
+                listadopedidos.Remove(pedido);
             }
+
             
             
         }
 
-        public bool CambiaEstadoPedido(int nroPedido)
+        public void CambiaEstadoPedido(int nroPedido)
         {
-            Pedidos pedido=listadopedidos.FirstOrDefault(p => p.Numero == nroPedido);
-            pedido.CambiarEstado();
-            if (pedido!=null)
+            //Pedidos pedido=listadopedidos.FirstOrDefault(p => p.Numero == nroPedido);
+            var pedidoElegido = from pedido in listadopedidos
+                                where pedido.Numero == nroPedido 
+                                select pedido;
+            foreach (Pedidos pedido in pedidoElegido)
             {
-                return true;
+                pedido.CambiarEstado();
             }
-            return false;
 
         }
 
         public void MostrarPedidos()
-    {
-        foreach(Pedidos pedido in listadopedidos)
         {
-            pedido.MostrarPedido();
+            foreach(Pedidos pedido in listadopedidos)
+            {
+                pedido.MostrarPedido();
+            }
         }
-    }
     }
 }
