@@ -26,21 +26,28 @@ while(opcion <=4  && opcion >= 1)
     switch(opcion)
     {
         case 1:
-            cadeteria.DarAltaPedido2(); //este quita el pedido 
-            //cadeteria.DarAltaPedido2(); //este agrega un pedido a un cadete
-            break;
-        case 2:
-            Console.WriteLine("Ingrese el nro del pedido:");
-            int.TryParse(Console.ReadLine(), out int nroPedido);
-
-            bool asignado = cadeteria.AsignarPedidoACadete(nroPedido);
-            if (asignado)
+            bool tarea = cadeteria.DarAltaPedido2(); 
+            if (tarea)
             {
-                Console.WriteLine("Pedido asignado con éxito!");
+               Console.WriteLine("Pedido tomado con éxito!");
             }else
             {
-                Console.WriteLine("No se pudo asignar el pedido");
+                Console.WriteLine("No se pudo tomar el pedido");
+             
             }
+            break;
+        case 2:
+            // Console.WriteLine("Ingrese el nro del pedido:");
+            // int.TryParse(Console.ReadLine(), out int nroPedido);
+
+            // bool asignado = cadeteria.AsignarPedidoACadete(nroPedido);
+            // if (asignado)
+            // {
+            //     Console.WriteLine("Pedido asignado con éxito!");
+            // }else
+            // {
+            //     Console.WriteLine("No se pudo asignar el pedido");
+            // }
 
             
             break;

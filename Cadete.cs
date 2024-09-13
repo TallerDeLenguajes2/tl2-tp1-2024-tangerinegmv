@@ -20,12 +20,12 @@ namespace EspacioCadeteria
            listadopedidos= new List<Pedidos>();
         }
 
-        public bool TomarPedido(int nropedido)
+        public bool TomarPedido(Pedidos pedido)
         {
-            Pedidos pedidoElegido = listadopedidos.FirstOrDefault(pedido => pedido.Numero == nropedido);
-            if(pedidoElegido != null)
+            //Pedidos pedidoElegido = listadopedidos.FirstOrDefault(pedido => pedido.Numero == nropedido);
+            if(pedido != null)
             {
-              listadopedidos.Add(pedidoElegido);
+              listadopedidos.Add(pedido);
               return true;
             }else
             {
