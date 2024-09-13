@@ -1,5 +1,7 @@
 
 //using EspacioCadete;
+using System.Security.Principal;
+
 namespace EspacioCadeteria
 //comando Split para archivo csv
 {
@@ -14,7 +16,8 @@ namespace EspacioCadeteria
     {
         private string nombre;
         private int telefono;
-      
+        private double comision = 500;
+        private List<Pedidos> listadopedidos;
         private List<Cadete> listadocadetes;
   
         public string Nombre { get => nombre; set => nombre = value; }
@@ -40,26 +43,22 @@ namespace EspacioCadeteria
         }
         public void CambiarEstadoPedido(int nroPedido)
         {
-            foreach(Cadete cadete in listadocadetes)
-            {
-                
-               cadete.CambiaEstadoPedido(nroPedido);
-              
-            }
+            Pedidos pedidoElegido = listadopedidos.FirstOrDefault(p => p.Numero == nroPedido);
+            pedidoElegido.CambiarEstado();
         }    
-        public void DarAltaPedido1()
-        {
+        // public void DarAltaPedido1()
+        // {
             
-           Console.WriteLine("Ingrese el nro del pedido:");
-            int.TryParse(Console.ReadLine(), out int nropedido);
+        //    Console.WriteLine("Ingrese el nro del pedido:");
+        //     int.TryParse(Console.ReadLine(), out int nropedido);
 
-            foreach(Cadete cadete in listadocadetes)
-            {
-               cadete.QuitarPedido(nropedido);
-            }
+        //     foreach(Cadete cadete in listadocadetes)
+        //     {
+        //        cadete.QuitarPedido(nropedido);
+        //     }
 
           
-        }
+        // }
         public void DarAltaPedido2()
         {
             
@@ -101,6 +100,32 @@ namespace EspacioCadeteria
                 return false;
             }
             
+        }
+
+        /* public void ReasignarCadete(int npedido)
+        {
+            foreach(Cadete cadete in listadocadetes)
+            {
+               
+            }
+
+        } */
+
+        public double JornalACobrar(int id)
+        {
+            Cadete cadeteElegido = listadocadetes.FirstOrDefault(c => c.Id == id);
+            var pedidosElegidos = from p in listadopedidos
+                                    where p.Cadete == cadeteElegido && p.Estado == Estados.completo
+                                    select p;
+            return pedidosElegidos.Count()*comision;
+
+        }
+
+        public void  AsignarCadeteAPedido(int idCadete, int nroPedido)
+        {
+            Pedidos pedidoElegido = listadopedidos.FirstOrDefault(p => p.Numero == nroPedido);
+            Cadete cadeteElegido = listadocadetes.FirstOrDefault(c => c.Id == idCadete);
+            pedidoElegido.Cadete = cadeteElegido;
         }
     }
 
