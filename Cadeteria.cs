@@ -19,7 +19,6 @@ namespace EspacioCadeteria
   
         public string Nombre { get => nombre; set => nombre = value; }
         public int Telefono { get => telefono; set => telefono = value; }
-       // public List<Cadete> ListadoCadetes { get => listadocadetes; set => listadocadetes = value; }
 
         public Cadeteria()
         {
@@ -47,19 +46,7 @@ namespace EspacioCadeteria
               
             }
         }    
-        public void DarAltaPedido1()
-        {
-            
-           Console.WriteLine("Ingrese el nro del pedido:");
-            int.TryParse(Console.ReadLine(), out int nropedido);
-
-            foreach(Cadete cadete in listadocadetes)
-            {
-               cadete.QuitarPedido(nropedido);
-            }
-
-          
-        }
+        
         public void DarAltaPedido2()
         {
             
@@ -102,10 +89,14 @@ namespace EspacioCadeteria
             }
             
         }
-    }
 
-//verdireccion que sea un metodo que devuelva un string 
-    
-    //en cadete hago el constructor cadete(){new list PEdido}
-}//en cadete metodo agregarpedido y quitarpedido
-//en constructor crear Constructor en clase pedidos de Clientes cliente, con parametros los campos de cliente
+        public void ReasignarCadete(int cadAnt, int nroPedido, int cadNuevo)
+        {
+            Cadete cadAnterior = listadocadetes.FirstOrDefault(c => c.Id == cadAnt);
+            Pedidos pedidoElegido = cadAnterior.ReasignarCadete(nroPedido);
+            Cadete cadeteNuevo = listadocadetes.FirstOrDefault(c => c.Id == cadNuevo);
+            cadeteNuevo.TomarPedido(pedidoElegido.Numero);
+            cadAnterior.QuitarPedido(nroPedido);
+        }
+    }
+}

@@ -35,15 +35,7 @@ namespace EspacioCadeteria
         }
         public void QuitarPedido(int nropedido)
         {   
-
-            //esto se lo puede reemplazar con comandos linq
-            /*     foreach (Pedidos pedido in listadopedidos)
-                    {
-                        if (pedido.Numero==nropedido)
-                            listadopedidos.Remove(pedido);
-                    } */
-
-            //con linq
+         //con linq
             var pedidoElegido = from pedido in listadopedidos
                                 where pedido.Numero == nropedido 
                                 select pedido;
@@ -75,6 +67,12 @@ namespace EspacioCadeteria
             {
                 pedido.MostrarPedido();
             }
+        }
+        public Pedidos ReasignarCadete(int nroPedido )
+        {
+            Pedidos pedidoElegido = listadopedidos.FirstOrDefault(p => p.Numero == nroPedido);
+            return pedidoElegido;
+
         }
     }
 }
