@@ -1,5 +1,6 @@
 
 //using EspacioCadete;
+using System.Data.SqlTypes;
 using System.Security.Principal;
 
 namespace EspacioCadeteria
@@ -26,7 +27,8 @@ namespace EspacioCadeteria
 
         public Cadeteria()
         {
-            this.listadocadetes =new List<Cadete>();
+            this.listadocadetes = new List<Cadete>();
+            this. listadopedidos  = new List<Pedidos>();
         }
         public void AgregarCadetes(Cadete cadete)
         {
@@ -46,25 +48,10 @@ namespace EspacioCadeteria
             Pedidos pedidoElegido = listadopedidos.FirstOrDefault(p => p.Numero == nroPedido);
             pedidoElegido.CambiarEstado();
         }    
-        // public void DarAltaPedido1()
-        // {
-            
-        //    Console.WriteLine("Ingrese el nro del pedido:");
-        //     int.TryParse(Console.ReadLine(), out int nropedido);
-
-        //     foreach(Cadete cadete in listadocadetes)
-        //     {
-        //        cadete.QuitarPedido(nropedido);
-        //     }
-
-          
-        // }
+        
         public void DarAltaPedido2()
         {
             
-            Console.WriteLine("Ingrese el nro del pedido:");
-            int.TryParse(Console.ReadLine(), out int nropedido);
-
             Console.WriteLine("----------Carga Del Cliente----------");
             Console.WriteLine("Ingrese el nombre del cliente:");
             string nombre = Console.ReadLine();
@@ -78,38 +65,41 @@ namespace EspacioCadeteria
             Pedidos pedido = new Pedidos(nombre, direccion, telefono, DRD); 
             Random random = new Random();
             int randomId = random.Next(1,listadocadetes.Count);
-            Cadete cadeteElegido = listadocadetes.FirstOrDefault(cadete => cadete.Id == randomId);
-            bool tarea = cadeteElegido.TomarPedido(pedido.Numero);
            
         }
 
 
-        public bool AsignarPedidoACadete(int nropedido)
-        {
+        // public bool AsignarPedidoACadete(int nropedido)
+        // {
            
-            Console.WriteLine("Ingrese el id del cadete al que le asignará el pedido:");
-            int.TryParse(Console.ReadLine(), out int idCadete);
+        //     Console.WriteLine("Ingrese el id del cadete al que le asignará el pedido:");
+        //     int.TryParse(Console.ReadLine(), out int idCadete);
 
-            Cadete cadeteElegido = listadocadetes.FirstOrDefault(cadete => cadete.Id == idCadete);
-            if (cadeteElegido != null)
-            {
-                return cadeteElegido.TomarPedido(nropedido);
+        //     Cadete cadeteElegido = listadocadetes.FirstOrDefault(cadete => cadete.Id == idCadete);
+        //     if (cadeteElegido != null)
+        //     {
+        //         return cadeteElegido.TomarPedido(nropedido);
                
-            }else
-            {
-                return false;
-            }
+        //     }else
+        //     {
+        //         return false;
+        //     }
             
-        }
+        // }
 
-        /* public void ReasignarCadete(int npedido)
+         public bool ReasignarCadete(int npedido, int cadNuevo)
         {
-            foreach(Cadete cadete in listadocadetes)
-            {
-               
-            }
+           bool tarea = AsignarCadeteAPedido(cadNuevo, npedido);
+           Pedidos pedido = listadopedidos.FirstOrDefault(p => p.Numero == npedido);
+           Cadete cadete = listadocadetes.FirstOrDefault(c => c.Id == cadNuevo);
+           if (pedido.Cadete == cadete)
+           {
+                return true;
+           }else{
+            return false;
+           }
 
-        } */
+        }
 
         public double JornalACobrar(int id)
         {
@@ -121,11 +111,18 @@ namespace EspacioCadeteria
 
         }
 
-        public void  AsignarCadeteAPedido(int idCadete, int nroPedido)
+        public bool  AsignarCadeteAPedido(int idCadete, int nroPedido)
         {
             Pedidos pedidoElegido = listadopedidos.FirstOrDefault(p => p.Numero == nroPedido);
             Cadete cadeteElegido = listadocadetes.FirstOrDefault(c => c.Id == idCadete);
             pedidoElegido.Cadete = cadeteElegido;
+            if (pedidoElegido.Cadete != null)
+            {
+                return true;
+            }else
+            {
+                return false;
+            }
         }
     }
 

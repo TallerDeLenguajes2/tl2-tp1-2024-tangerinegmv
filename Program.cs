@@ -26,22 +26,11 @@ while(opcion <=4  && opcion >= 1)
     switch(opcion)
     {
         case 1:
-            cadeteria.DarAltaPedido2(); //este quita el pedido 
-            //cadeteria.DarAltaPedido2(); //este agrega un pedido a un cadete
+            cadeteria.DarAltaPedido2();
             break;
         case 2:
-            Console.WriteLine("Ingrese el nro del pedido:");
-            int.TryParse(Console.ReadLine(), out int nroPedido);
-
-            bool asignado = cadeteria.AsignarPedidoACadete(nroPedido);
-            if (asignado)
-            {
-                Console.WriteLine("Pedido asignado con éxito!");
-            }else
-            {
-                Console.WriteLine("No se pudo asignar el pedido");
-            }
-
+           
+           Opcion2();
             
             break;
         case 3:
@@ -53,17 +42,48 @@ while(opcion <=4  && opcion >= 1)
             
             break;
         case 4:
-            /* Console.WriteLine("Ingrese el nro del pedido a cambiar:");
-            int.TryParse(Console.ReadLine(), out int npedido);
-            
-            cadeteria.ReasignarCadete(npedido); */
+           Opcion4();
             
             break;
             
     }
 }
 
+ void Opcion2()
+{
+    Console.WriteLine("Ingrese el nro del pedido:");
+    int.TryParse(Console.ReadLine(), out int nroPedido);
+    Console.WriteLine("Ingrese el Id del cadete:");
+    int.TryParse(Console.ReadLine(), out int idCadete);
 
+    bool tarea = cadeteria.AsignarCadeteAPedido(idCadete, nroPedido);
+    if (tarea)
+    {
+        Console.WriteLine("Pedido asignado con éxito!");
+
+    }else
+    {
+        Console.WriteLine("No se pudo asignar el cadete.");
+    }
+}
+
+void Opcion4()
+{
+    Console.WriteLine("Ingrese el nro del pedido:");
+    int.TryParse(Console.ReadLine(), out int nroPedido);
+    Console.WriteLine("Ingrese el Id del Nuevo Cadete:");
+    int.TryParse(Console.ReadLine(), out int cadNuevo);
+
+    bool tarea = cadeteria.ReasignarCadete(nroPedido, cadNuevo);
+    if (tarea)
+    {
+        Console.WriteLine("Se reasignó el cadete con exito.");
+
+    }else
+    {
+        Console.WriteLine("No se pudo reasignar.");
+    }
+}
 
 
 
