@@ -26,7 +26,7 @@ while(opcion <=4  && opcion >= 1)
     switch(opcion)
     {
         case 1:
-            cadeteria.DarAltaPedido1(); //este quita el pedido 
+            cadeteria.DarAltaPedido2(); //este quita el pedido 
             //cadeteria.DarAltaPedido2(); //este agrega un pedido a un cadete
             break;
         case 2:
@@ -45,15 +45,18 @@ while(opcion <=4  && opcion >= 1)
             
             break;
         case 3:
-            System.Console.WriteLine("Ingrese el nro del pedido a cambiar:");
+            Console.WriteLine("Ingrese el nro del pedido a cambiar:");
             int.TryParse(Console.ReadLine(), out int nropedido);
             
             cadeteria.CambiarEstadoPedido(nropedido);
             
             
-            
             break;
         case 4:
+            /* Console.WriteLine("Ingrese el nro del pedido a cambiar:");
+            int.TryParse(Console.ReadLine(), out int npedido);
+            
+            cadeteria.ReasignarCadete(npedido); */
             
             break;
             

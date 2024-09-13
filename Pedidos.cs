@@ -22,8 +22,10 @@ namespace EspacioCadeteria
 
         private int numero;
         private Estados estado;
+        private Cadete cadete;
         public int Numero { get => numero; set => numero = value; }
         public Estados Estado { get => estado; set => estado = value; }
+        public Cadete Cadete { get => cadete; set => cadete = value; }
 
         public string VerDireccionCliente()
         {
@@ -44,9 +46,14 @@ namespace EspacioCadeteria
          
         public void CambiarEstado()
         {
-            System.Console.WriteLine("Cambiar a estado:");
-            System.Console.WriteLine("1 - Completado");
-            Estado = Estados.completo;
+            if (Estado == Estados.completo)
+            {
+                Estado = Estados.enCurso;
+            }else
+            {
+                Estado = Estados.completo;
+            }
+            
         }
 
     }
