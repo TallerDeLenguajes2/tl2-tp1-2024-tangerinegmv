@@ -16,6 +16,7 @@ namespace EspacioCadeteria
         private int telefono;
       
         private List<Cadete> listadocadetes;
+        private List<Pedidos> listadopedidos;
   
         public string Nombre { get => nombre; set => nombre = value; }
         public int Telefono { get => telefono; set => telefono = value; }
@@ -23,12 +24,29 @@ namespace EspacioCadeteria
         public Cadeteria()
         {
             this.listadocadetes =new List<Cadete>();
+            this.listadopedidos = new List<Pedidos>();
         }
         public void AgregarCadetes(Cadete cadete)
         {
             this.listadocadetes.Add(cadete);
         }
 
+        public float JornalACobrar(int id)
+        {
+            float jornal = 0;
+            foreach (Pedidos p in listadopedidos)
+            {
+                if (p.Cadete.Id == id)
+                {
+
+                    if (p.Estado == Estados.completo)
+                    {
+                        jornal = jornal + 500 ;
+                    }
+                }
+            }
+            return jornal;
+        }
          public void MostrarCadetes()
         {
            Console.WriteLine("Cadetes:");
@@ -39,15 +57,11 @@ namespace EspacioCadeteria
         }
         public void CambiarEstadoPedido(int nroPedido)
         {
-            foreach(Cadete cadete in listadocadetes)
-            {
-                
-               cadete.CambiaEstadoPedido(nroPedido);
-              
-            }
+           Pedidos pedidoElegido = listadopedidos.FirstOrDefault(p => p.Numero == nroPedido);
+           pedidoElegido.CambiarEstado();
         }    
         
-        public bool DarAltaPedido2()
+        public bool DarAltaPedido()
         {
         
             Console.WriteLine("----------Carga Del Cliente----------");
@@ -61,44 +75,50 @@ namespace EspacioCadeteria
             string DRD = Console.ReadLine();
             Console.WriteLine("-------------------------------------");
             Pedidos pedido = new Pedidos(nombre, direccion, telefono, DRD); 
-            Random random = new Random();
-            int randomId = random.Next(1,listadocadetes.Count);
-            Cadete cadeteElegido = listadocadetes.FirstOrDefault(cadete => cadete.Id == 1);
-            bool tarea = cadeteElegido.TomarPedido(pedido);
-            return tarea;
+            listadopedidos.Add(pedido);
+            // Random random = new Random();
+            // int randomId = random.Next(1,listadocadetes.Count);
+            // Cadete cadeteElegido = listadocadetes.FirstOrDefault(cadete => cadete.Id == 1);
+            // bool tarea = cadeteElegido.TomarPedido(pedido);
+            return true;
            
         }
 
 
-        // public bool AsignarPedidoACadete(int nropedido)
-        // {
-           
-        //     Console.WriteLine("Ingrese el id del cadete al que le asignará el pedido:");
-        //     int.TryParse(Console.ReadLine(), out int idCadete);
-
-        //     Cadete cadeteElegido = listadocadetes.FirstOrDefault(cadete => cadete.Id == idCadete);
-        //     if (cadeteElegido != null)
-        //     {
-        //         return cadeteElegido.TomarPedido(nropedido);
+        public bool AsignarCadeteAPedido(int nropedido, int idCadete)
+        { 
+            Cadete cadeteElegido = listadocadetes.FirstOrDefault(cadete => cadete.Id == idCadete);
+            Pedidos pedidoElegido = listadopedidos.FirstOrDefault(p => p.Numero == nropedido);
+            if (pedidoElegido != null && listadopedidos.Contains(pedidoElegido))
+            {
+               if (cadeteElegido != null && listadocadetes.Contains(cadeteElegido))
+               {
+                 pedidoElegido.TomarPedido(cadeteElegido);
+                 return true;
+               }else
+               {
+                return false;
+               }
                
-        //     }else
-        //     {
-        //         return false;
-        //     }
+            }else
+            {
+                return false;
+            }
             
-        // }
+        }
+
+        
 
         public void ReasignarCadete(int cadAnt, int nroPedido, int cadNuevo)
         {
             Cadete cadAnterior = listadocadetes.FirstOrDefault(c => c.Id == cadAnt);
-            Pedidos pedidoElegido = cadAnterior.ReasignarCadete(nroPedido);
             Cadete cadeteNuevo = listadocadetes.FirstOrDefault(c => c.Id == cadNuevo);
-            bool tarea = cadeteNuevo.TomarPedido(pedidoElegido);
-            if (tarea)
+            if (listadocadetes.Contains(cadeteNuevo))
             {
-                cadAnterior.QuitarPedido(pedidoElegido);
+                bool tarea = AsignarCadeteAPedido(nroPedido, cadNuevo);
+               
             }
-            
+
         }
     }
 }
