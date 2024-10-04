@@ -44,9 +44,16 @@ namespace EspacioCadeteria
          
         public void CambiarEstado()
         {
-            System.Console.WriteLine("Cambiar a estado:");
-            System.Console.WriteLine("1 - Completado");
-            Estado = Estados.completo;
+           if (Estado == Estados.enCurso)
+           {
+             Estado = Estados.completo;
+           }else
+           {
+            Estado = Estados.enCurso;
+           }
+           
+        
+           
         }
 
     }

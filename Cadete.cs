@@ -33,18 +33,10 @@ namespace EspacioCadeteria
             }
             
         }
-        public void QuitarPedido(int nropedido)
+        public void QuitarPedido(Pedidos pedido)
         {   
-         //con linq
-            var pedidoElegido = from pedido in listadopedidos
-                                where pedido.Numero == nropedido 
-                                select pedido;
-            foreach (Pedidos pedido in pedidoElegido)
-            {
-                listadopedidos.Remove(pedido);
-            }
-
-            
+         
+            listadopedidos.Remove(pedido);            
             
         }
 

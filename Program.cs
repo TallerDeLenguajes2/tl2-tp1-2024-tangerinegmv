@@ -12,13 +12,14 @@ datos.CargarCadeteria("cadeteria.csv", cadeteria);
 int opcion = 2;
 //Pedidos pedido = null;
 
-while(opcion <=4  && opcion >= 1)
+
+while(opcion != 5)
 {
-    System.Console.WriteLine("1 - Dar de alta un pedido");
-    System.Console.WriteLine("2 - Asignar pedido a un cadete");
-    System.Console.WriteLine("3 - Cambiar estado de un pedido");
-    System.Console.WriteLine("4 - Reasignar pedido a otro cadete");
-    System.Console.WriteLine("5 - Salir");
+    Console.WriteLine("1 - Dar de alta un pedido");
+    Console.WriteLine("2 - Asignar pedido a un cadete");
+    Console.WriteLine("3 - Cambiar estado de un pedido");
+    Console.WriteLine("4 - Reasignar pedido a otro cadete");
+    Console.WriteLine("5 - Salir");
 
 
     System.Console.WriteLine("Ingrese una opcion:");

@@ -63,7 +63,7 @@ namespace EspacioCadeteria
             Pedidos pedido = new Pedidos(nombre, direccion, telefono, DRD); 
             Random random = new Random();
             int randomId = random.Next(1,listadocadetes.Count);
-            Cadete cadeteElegido = listadocadetes.FirstOrDefault(cadete => cadete.Id == randomId);
+            Cadete cadeteElegido = listadocadetes.FirstOrDefault(cadete => cadete.Id == 1);
             bool tarea = cadeteElegido.TomarPedido(pedido);
             return tarea;
            
@@ -94,7 +94,11 @@ namespace EspacioCadeteria
             Pedidos pedidoElegido = cadAnterior.ReasignarCadete(nroPedido);
             Cadete cadeteNuevo = listadocadetes.FirstOrDefault(c => c.Id == cadNuevo);
             bool tarea = cadeteNuevo.TomarPedido(pedidoElegido);
-            cadAnterior.QuitarPedido(pedidoElegido.Numero);
+            if (tarea)
+            {
+                cadAnterior.QuitarPedido(pedidoElegido);
+            }
+            
         }
     }
 }
