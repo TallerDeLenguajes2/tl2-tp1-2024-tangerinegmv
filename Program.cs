@@ -42,7 +42,17 @@ while(opcion != 6)
     switch(opcion)
     {
         case 1:
-            bool tarea = cadeteria.DarAltaPedido(); 
+            Console.WriteLine("----------Carga Del Cliente----------");
+            Console.WriteLine("Ingrese el nombre del cliente:");
+            string nombre = Console.ReadLine();
+            Console.WriteLine("Ingrese la direccion del cliente:");
+            string direccion = Console.ReadLine();
+            Console.WriteLine("Ingrese el numero del cliente(sin codigo de area):");
+            string telefono = Console.ReadLine();
+            Console.WriteLine("Ingrese algun dato de referencia de la direccion:");
+            string DRD = Console.ReadLine();
+            Console.WriteLine("-------------------------------------");
+            bool tarea = cadeteria.DarAltaPedido(nombre, direccion, telefono, DRD); 
             if (tarea)
             {
                Console.WriteLine("Pedido tomado con éxito!");

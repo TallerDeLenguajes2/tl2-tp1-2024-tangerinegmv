@@ -47,39 +47,19 @@ namespace EspacioCadeteria
             }
             return jornal;
         }
-         public void MostrarCadetes()
-        {
-           Console.WriteLine("Cadetes:");
-            foreach(Cadete cadete in listadocadetes)
-            {
-               Console.WriteLine($"Cadete {cadete.Id}\nNombre: {cadete.Nombre}\nTelefono: {cadete.Telefono}");
-            }
-        }
+       
         public void CambiarEstadoPedido(int nroPedido)
         {
            Pedidos pedidoElegido = listadopedidos.FirstOrDefault(p => p.Numero == nroPedido);
            pedidoElegido.CambiarEstado();
         }    
         
-        public bool DarAltaPedido()
+        public bool DarAltaPedido(string nombre, string direccion, string telefono, string DRD)
         {
         
-            Console.WriteLine("----------Carga Del Cliente----------");
-            Console.WriteLine("Ingrese el nombre del cliente:");
-            string nombre = Console.ReadLine();
-            Console.WriteLine("Ingrese la direccion del cliente:");
-            string direccion = Console.ReadLine();
-            Console.WriteLine("Ingrese el numero del cliente(sin codigo de area):");
-            string telefono = Console.ReadLine();
-            Console.WriteLine("Ingrese algun dato de referencia de la direccion:");
-            string DRD = Console.ReadLine();
-            Console.WriteLine("-------------------------------------");
             Pedidos pedido = new Pedidos(nombre, direccion, telefono, DRD); 
             listadopedidos.Add(pedido);
-            // Random random = new Random();
-            // int randomId = random.Next(1,listadocadetes.Count);
-            // Cadete cadeteElegido = listadocadetes.FirstOrDefault(cadete => cadete.Id == 1);
-            // bool tarea = cadeteElegido.TomarPedido(pedido);
+            
             return true;
            
         }
