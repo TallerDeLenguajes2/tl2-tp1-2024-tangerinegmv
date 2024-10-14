@@ -2,11 +2,25 @@
 
         
 
-AccesoAdatos datos = new AccesoAdatos();
+//AccesoAdatos datos = new AccesoAdatos();
 Cadeteria cadeteria = new Cadeteria();
 
-datos.CargarCadetes("cadetes.csv", cadeteria);
-datos.CargarCadeteria("cadeteria.csv", cadeteria);
+Console.WriteLine("1 - Cargar CSV");
+Console.WriteLine("2 - Cargar JSON");
+Console.WriteLine("Ingrese una opcion:");
+int.TryParse(Console.ReadLine(), out int eleccion);
+if (eleccion == 1)
+{
+    AccesoCSV datos = new AccesoCSV();
+    datos.CargarCadetes("cadetes.csv", cadeteria);
+    datos.CargarCadeteria("cadeteria.csv", cadeteria);
+}else
+{
+    AccesoJSON datos = new AccesoJSON();
+    datos.CargarCadetes("cadetes.json", cadeteria);
+    datos.CargarCadeteria("cadeteria.json", cadeteria);
+}
+
 
 
 int opcion = 2;
@@ -85,8 +99,6 @@ while(opcion != 6)
 
     }
 }
-
-
 
 
 

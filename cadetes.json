@@ -1,0 +1,7 @@
+[
+    {"Id": 1, "Nombre": "A", "Direccion": "dire1", "Telefono": "12345"},
+    {"Id": 2, "Nombre": "B", "Direccion": "dire2", "Telefono": "12345"},
+    {"Id": 3, "Nombre": "C", "Direccion": "dire3", "Telefono": "12345"},
+    {"Id": 4, "Nombre": "D", "Direccion": "dire4", "Telefono": "12345"},
+    {"Id": 5, "Nombre": "E", "Direccion": "dire5", "Telefono": "12345"}
+]
